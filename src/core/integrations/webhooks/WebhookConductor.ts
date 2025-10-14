@@ -24,9 +24,14 @@ export class WebhookConductor {
   }
 
   public configure(session: WhatsappSession, webhooks: WebhookConfig[]) {
-    for (const webhookConfig of webhooks) {
-      this.configureSingleWebhook(session, webhookConfig);
-    }
+    // Webhooks desabilitados para evitar erros 429
+    this.logger.info('Webhooks disabled - skipping configuration');
+    return;
+    
+    // Código original comentado:
+    // for (const webhookConfig of webhooks) {
+    //   this.configureSingleWebhook(session, webhookConfig);
+    // }
   }
 
   private configureSingleWebhook(

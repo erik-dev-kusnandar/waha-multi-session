@@ -315,16 +315,20 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
    * Combine per session and global webhooks
    */
   private getWebhooks(sessionName?: string) {
-    let webhooks: WebhookConfig[] = [];
-    const sessionConfig = sessionName ? this.sessionConfigs.get(sessionName) : this.sessionConfigs.get(this.DEFAULT);
-    if (sessionConfig?.webhooks) {
-      webhooks = webhooks.concat(sessionConfig.webhooks);
-    }
-    const globalWebhookConfig = this.config.getWebhookConfig();
-    if (globalWebhookConfig) {
-      webhooks.push(globalWebhookConfig);
-    }
-    return webhooks;
+    // Webhooks desabilitados para evitar erros 429
+    return [];
+    
+    // Código original comentado:
+    // let webhooks: WebhookConfig[] = [];
+    // const sessionConfig = sessionName ? this.sessionConfigs.get(sessionName) : this.sessionConfigs.get(this.DEFAULT);
+    // if (sessionConfig?.webhooks) {
+    //   webhooks = webhooks.concat(sessionConfig.webhooks);
+    // }
+    // const globalWebhookConfig = this.config.getWebhookConfig();
+    // if (globalWebhookConfig) {
+    //   webhooks.push(globalWebhookConfig);
+    // }
+    // return webhooks;
   }
 
   /**
