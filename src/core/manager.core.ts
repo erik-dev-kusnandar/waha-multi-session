@@ -157,24 +157,20 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
   // API Methods
   //
   async exists(name: string): Promise<boolean> {
-    this.onlyDefault(name);
     const session = this.sessions.get(name);
     return session !== undefined && session !== DefaultSessionStatus.REMOVED;
   }
 
   isRunning(name: string): boolean {
-    this.onlyDefault(name);
     const session = this.sessions.get(name);
     return !!session && session !== DefaultSessionStatus.REMOVED;
   }
 
   async upsert(name: string, config?: SessionConfig): Promise<void> {
-    this.onlyDefault(name);
     this.sessionConfigs.set(name, config);
   }
 
   async start(name: string): Promise<SessionDTO> {
-    this.onlyDefault(name);
     const existingSession = this.sessions.get(name);
     if (existingSession && existingSession !== DefaultSessionStatus.REMOVED) {
       throw new UnprocessableEntityException(
@@ -263,7 +259,6 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
   }
 
   async stop(name: string, silent: boolean): Promise<void> {
-    this.onlyDefault(name);
     if (!this.isRunning(name)) {
       this.log.debug({ session: name }, `Session is not running.`);
       return;
@@ -300,12 +295,10 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
   }
 
   async logout(name: string): Promise<void> {
-    this.onlyDefault(name);
     await this.sessionAuthRepository.clean(name);
   }
 
   async delete(name: string): Promise<void> {
-    this.onlyDefault(name);
     this.sessions.set(name, DefaultSessionStatus.REMOVED);
     this.updateSession(name);
     this.sessionConfigs.delete(name);
@@ -349,7 +342,6 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
   }
 
   getSession(name: string): WhatsappSession {
-    this.onlyDefault(name);
     const session = this.sessions.get(name);
     if (!session || session === DefaultSessionStatus.REMOVED) {
       throw new NotFoundException(
@@ -424,7 +416,6 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
   }
 
   async getSessionInfo(name: string): Promise<SessionDetailedInfo | null> {
-    this.onlyDefault(name);
     const sessions = await this.getSessions(true);
     const session = sessions.find(s => s.name === name);
     if (!session) {
