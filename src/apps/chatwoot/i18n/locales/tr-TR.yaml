@@ -1,0 +1,354 @@
+# Turkish translations for ChatWoot integration
+locale.name: '🇹🇷 Türkçe (Turkish)'
+
+# Temel yerel kodu - geçerli bir BCP 47 yerel kodu olmalı
+# https://en.wikipedia.org/wiki/IETF_language_tag
+# WAHA bunu sayı, para birimi ve tarih/saat gösterimi için kullanır
+locale.base: 'tr-TR'
+
+app.inbox.contact.name: 'WhatsApp Entegrasyonu (WAHA)'
+app.inbox.contact.avatar.url: 'https://raw.githubusercontent.com/devlikeapro/waha/core/logo.png'
+
+# date.toLocaleString için "options"
+# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#options
+datetime:
+  locales: tr-TR
+  day: 2-digit
+  month: 2-digit
+  year: numeric
+  hour: 2-digit
+  minute: 2-digit
+  # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#timezonename
+  timeZoneName: shortGeneric
+  # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  # timeZone: 'Europe/Istanbul'
+
+job.report.error: |-
+  ⚠️ **{{{header}}}**
+  {{#attempts.nextDelay}}
+  🔄 {{attempts.nextDelay}} saniye içinde tekrar deneniyor...
+  {{/attempts.nextDelay}}
+  {{^attempts.nextDelay}}
+  ❌ Başka deneme hakkı kalmadı. Lütfen daha sonra tekrar deneyin.
+  {{/attempts.nextDelay}}
+  Deneme: {{{attempts.current}}} / {{{attempts.max}}}
+  Detaylar: [{{{details.text}}}]({{{details.url}}})
+  {{#error}}
+  ```
+
+  {{{error}}}
+  ```
+  {{/error}}
+
+job.report.succeeded: |-
+  ✅ **Başarılı**
+  Deneme: {{{attempts.current}}} / {{{attempts.max}}}
+  Detaylar: [{{{details.text}}}]({{{details.url}}})
+
+whatsapp.message.sending.error: WhatsApp'ta mesaj gönderilemedi.
+whatsapp.message.receiving.error: WhatsApp'tan mesaj alınamadı
+whatsapp.message.removing.error: WhatsApp'tan mesaj kaldırılamadı
+job.scheduled.error.header: Zamanlanmış görev yürütülemedi
+
+message.from.whatsapp: |-
+  {{{text}}}
+
+  📱 *WhatsApp'tan gönderildi*
+
+message.from.api: |-
+  {{{text}}}
+
+  📱 *API aracılığıyla gönderildi*
+
+message.removed.in.whatsapp: |-
+  ❌ *Bu mesaj WhatsApp'ta silindi*
+
+message.edited.in.whatsapp: |-
+  {{{text}}}
+
+  ✏️ *WhatsApp'ta düzenlendi*
+
+whatsapp.group.message: |-
+  👥 *{{{participant}}}*
+
+  {{{text}}}
+
+whatsapp.reaction.added: |-
+  *Tepki verdi* {{{emoji}}}
+
+whatsapp.reaction.removed: |-
+  *Tepki kaldırıldı*
+
+whatsapp.contact.group.suffix: 'Grup'
+whatsapp.contact.channel.suffix: 'Kanal'
+whatsapp.contact.broadcast.suffix: 'Yayın Listesi'
+# Aka Stories
+whatsapp.contact.status.name: 'Durum'
+
+app.connected.message: |-
+  🔗 **BAĞLANDI: WhatsApp Oturumu ChatWoot Gelen Kutusuna**
+
+  ✅ WhatsApp oturumu **{{{name}}}** bu ChatWoot Gelen Kutusuna başarıyla bağlandı.
+
+  Bu gelen kutusu artık **WhatsApp Hesabınıza** bağlı. Mesajları doğrudan buradan gönderip alabilirsiniz — tıpkı WhatsApp kullanır gibi, ancak ChatWoot içinde.
+
+  Ayrıca bu gelen kutusuna bağlı WhatsApp oturumunu da yönetebilirsiniz. Kullanılabilir eylemleri görmek için, bu sohbete **help** gönderin.
+
+  📋 Yapabileceğiniz yaygın eylemler:
+  - WhatsApp oturumunun aktif olup olmadığını kontrol etme
+  - WhatsApp oturumunu yeniden başlatma veya durdurma
+  - Çıkış yapma ve yeni bir QR kod tarayarak yeniden bağlanma
+
+  Her şey çalışıyorsa, özgürce sohbet edebileceksiniz. Uyarılar görürseniz, WhatsApp hesabınızı yeniden bağlamanız gerekebilir.
+
+  Hadi başlayalım! 🚀
+
+app.disconnected.message: |-
+  🔌 **BAĞLANTI KESİLDİ: WhatsApp Oturumu ChatWoot Gelen Kutusundan**
+
+  ❌ WhatsApp oturumu **{{{name}}}** bu ChatWoot Gelen Kutusundan bağlantısı kesildi.
+
+  Artık WhatsApp'tan mesaj gönderemez veya alamazsınız.
+
+  Yeniden bağlanmak için, lütfen yöneticinizle iletişime geçin.
+
+app.updated.message: |-
+  🔄 **GÜNCELLENDİ: WhatsApp Oturum Ayarları**
+
+  ✅ WhatsApp oturumu **{{{name}}}** için ayarlar güncellendi.
+
+app.commands.list: |-
+  Aşağıdaki komutlardan birini göndererek **WhatsApp Entegrasyonu**nu yönetebilirsiniz:
+
+  🖥️ **Oturum**:
+  1. **status** - mevcut oturum durumunu alın.
+  2. **restart** - oturumu yeniden başlatın - bu, WhatsApp hesabınızı yeniden bağlamaya çalışacaktır.
+  3. **start** - oturumu başlatın.
+  4. **stop** - oturumu durdurun.
+  5. **logout** - oturumdan çıkış yapın, böylece QR kodu tarayabilir ve oturumu onarabilirsiniz.
+  6. **qr** - oturum için QR kodu alın.
+  7. **screenshot** - oturumun ekran görüntüsünü alın (yalnızca **WEBJS** motorunda kullanılabilir).
+  8. **help** - kullanılabilir komutlar.
+
+  {{#commands.server}}
+  ⚙️ Sunucu:
+  - **server status** - sunucu sürümü ve durum bilgilerini alın.
+  - **server reboot** - sunucuyu nazikçe yeniden başlatın.
+  - **server reboot force** - sunucuyu zorla yeniden başlatın.
+  {{/commands.server}}
+
+  Bu konuşmaya bir **komut** (büyük/küçük harf duyarsız) veya **komut numarası** gönderin.
+
+app.commands.server.disabled: ⛔ **Sunucu komutları devre dışı**.
+
+  Lütfen yöneticinizle iletişime geçin.
+
+  Kullanılabilir komutların listesini almak için **help** gönderin.
+
+app.help.reminder: |-
+  Kullanılabilir komutların listesini almak için **help** gönderin.
+
+app.session.status.change: |-
+  {{{emoji}}} "{{{session}}}" oturumu {{{status}}} durumuna geçti
+
+app.session.current.status: |-
+  {{{emoji}}} **{{{session}}}** oturum durumu **{{{status}}}** içinde
+  **WhatsApp Hesabı:**
+
+  📱 **{{{name}}} ({{{id}}})**
+
+app.session.status.working: |-
+  ✅ Bu ChatWoot Gelen Kutusu **WhatsApp Hesabına** bağlı ve mesaj gönderip almaya hazır!
+
+  📱 **{{{name}}} ({{{id}}})**
+
+app.session.status.error: |-
+  ⚠️ **Bu ChatWoot Gelen Kutusu WhatsApp Hesabına bağlı ancak mesaj gönderip almaya hazır DEĞİL!**
+
+  Lütfen oturum durumunu kontrol edin ve yeniden başlatmayı deneyin veya çıkış yapın ve QR kodu tekrar tarayın.
+
+app.session.scan.qr.code: |-
+  ⚠️ **WhatsApp Hesabını bu ChatWoot Gelen Kutusuna bağlamak için telefonunuzda QR kodu tarayın!**
+
+app.server.version.and.status: |-
+  **Sürüm:**
+  ```
+  {{{version}}}
+  ```
+
+  **Durum:**
+  ```
+  {{{status}}}
+  ```
+
+app.server.reboot: |-
+  Sunucu nazikçe yeniden başlatılıyor...
+
+app.server.reboot.force: |-
+  Sunucu zorla yeniden başlatılıyor...
+
+app.logout.success: |-
+  ✅ Hesap başarıyla yetkilendirilmedi!
+
+waha.new.version.available: |-
+  🔄 **Yeni Sürüm Mevcut!**
+
+  Mevcut sürüm: **{{{currentVersion}}}**
+  Yeni sürüm: **{{{newVersion}}}**
+
+  👉 [**🆕 Değişiklik Günlüğü**]({{{changelogUrl}}}) içinde yenilikleri kontrol edin
+
+waha.core.version.used: |-
+  ❤️ **WAHA'yı Destekleyin!**
+
+  Ücretsiz **WAHA Core** sürümünü kullanıyorsunuz. Bu projeyi faydalı buluyorsanız, lütfen geliştirilmesini desteklemeyi düşünün.
+
+  Desteğiniz, güncellemeler, düzeltmeler ve yeni özellikler üzerinde çalışmaya devam edebilmemizin tek yoludur.
+
+  [**🎁 Bizi Destekleyin**]({{{supportUrl}}})
+
+chatwoot.to.whatsapp.message.text: |-
+  {{{ content }}}
+
+chatwoot.to.whatsapp.message.media.caption: |-
+  {{#singleAttachment}}
+  {{#content}}
+  {{{ content }}}
+  {{/content}}
+  {{/singleAttachment}}
+
+whatsapp.to.chatwoot.message: |-
+  {{{payload.body}}}
+
+whatsapp.to.chatwoot.message.contacts: |-
+  👤 **Paylaşılan Kişi(ler)**
+
+  {{#contacts}}
+  🪪 İsim: **{{fullName}}**
+  {{#phoneNumbers}}
+  - 📞 Telefon: **{{.}}**
+  {{/phoneNumbers}}
+
+  {{/contacts}}
+
+whatsapp.to.chatwoot.message.location: |-
+  {{#message}}
+  {{#locationMessage}}
+  📍 **Paylaşılan Konum**
+
+  {{#name}}
+  **{{name}}**
+  {{/name}}
+
+  {{#address}}
+  📍 **Adres:** {{address}}
+  {{/address}}
+
+  {{#url}}
+  🌐 **Web sitesi:** {{url}}
+  {{/url}}
+
+  🔗 **Haritada görüntüle:** https://www.google.com/maps?q={{degreesLatitude}},{{degreesLongitude}}
+  {{#caption}}{{caption}}{{/caption}}
+  {{/locationMessage}}
+
+  {{#liveLocationMessage}}
+  📍📡 **Canlı Konum Paylaşılıyor**
+  Gerçek zamanlı güncellemeleri görmek için **WhatsApp’ı** açın.
+
+  {{#name}}
+  **{{name}}**
+  {{/name}}
+
+  {{#address}}
+  📍 **Adres:** {{address}}
+  {{/address}}
+
+  {{#url}}
+  🌐 **Web sitesi:** {{url}}
+  {{/url}}
+
+  🔗 **Haritada görüntüle:** https://www.google.com/maps?q={{degreesLatitude}},{{degreesLongitude}}
+  {{#caption}}{{caption}}{{/caption}}
+  {{/liveLocationMessage}}
+  {{/message}}
+
+whatsapp.to.chatwoot.message.poll: |-
+  {{#poll}}
+  📊 **Anket**
+
+  **{{name}}**
+  {{#options}}
+  - {{optionName}}
+  {{/options}}
+  {{/poll}}
+
+whatsapp.to.chatwoot.message.event: |-
+  {{#message}}
+  {{#eventMessage}}
+  📅 **Etkinlik**
+
+  **{{name}}**
+  {{#description}}
+  {{description}}
+  {{/description}}
+
+  {{#location.name}}
+  📍 **Konum:** {{location.name}}
+  {{/location.name}}
+  {{#startTime}}
+  🕐 **Başlangıç:** {{startTime}}
+  {{/startTime}}
+  {{#endTime}}
+  🕐 **Bitiş:** {{endTime}}
+  {{/endTime}}
+  {{#joinLink}}
+  🔗 **Katılma bağlantısı:** [{{joinLink}}]({{joinLink}})
+  {{/joinLink}}
+  {{/eventMessage}}
+  {{/message}}
+
+whatsapp.to.chatwoot.message.pix: |-
+  💳 **PIX - Kopyala ve Yapıştır**
+
+  {{#pixData}}
+  {{#merchantName}}
+  **{{merchantName}}**
+  {{/merchantName}}
+
+  {{#key}}
+  **PIX Anahtarı:** {{key}}
+  {{/key}}
+  {{#keyType}}
+  **Tür:** {{keyType}}
+  {{/keyType}}
+  {{#totalAmount}}
+  **Tutar:** {{totalAmountFormatted}}
+  {{/totalAmount}}
+  {{#referenceId}}
+  **Referans:** {{referenceId}}
+  {{/referenceId}}
+
+  💳 **PIX Kopyala ve Yapıştır gönderildi**
+  {{/pixData}}
+
+whatsapp.to.chatwoot.message.unsupported: |-
+  ⚠️ **Bu mesaj türü ChatWoot’ta desteklenmiyor.**
+  📱 Görüntülemek için lütfen **WhatsApp’ı** açın.
+
+  Ayrıntılar: [{{{details.text}}}]({{{details.url}}})
+
+whatsapp.to.chatwoot.message.facebook.ad: |-
+  📢 **FACEBOOK İLANI**
+
+  **Başlık:** {{{adData.title}}}
+
+  **Açıklama:**
+  {{{adData.body}}}
+
+  **İlan Bağlantısı:** [Facebook’ta Görüntüle]({{{adData.sourceUrl}}})
+  **İlan Kimliği:** {{{adData.sourceId}}}
+
+  ---
+  💬 **Müşteri Mesajı:**
+  {{{payload.body}}}

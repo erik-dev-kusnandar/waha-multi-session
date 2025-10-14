@@ -1,0 +1,356 @@
+# Simplified Chinese translations for ChatWoot integration
+locale.name: '🇨🇳 中文（Simplified Chinese）'
+
+# 基础语言代码 - 必须是有效的 BCP 47 语言区域
+# https://en.wikipedia.org/wiki/IETF_language_tag
+# WAHA 使用它来格式化数字、货币和日期时间。
+locale.base: 'zh-CN'
+
+app.inbox.contact.name: 'WhatsApp 集成（WAHA）'
+app.inbox.contact.avatar.url: 'https://raw.githubusercontent.com/devlikeapro/waha/core/logo.png'
+
+# date.toLocaleString 的 "options"
+# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#options
+datetime:
+  locales: zh-CN
+  day: 2-digit
+  month: 2-digit
+  year: numeric
+  hour: 2-digit
+  minute: 2-digit
+  # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#timezonename
+  timeZoneName: shortGeneric
+  # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  # timeZone: 'Asia/Shanghai'
+
+job.report.error: |-
+  ⚠️ **{{{header}}}**
+  {{#attempts.nextDelay}}
+  🔄 将在 {{attempts.nextDelay}} 秒后重试...
+  {{/attempts.nextDelay}}
+  {{^attempts.nextDelay}}
+  ❌ 没有更多重试机会。请稍后再试。
+  {{/attempts.nextDelay}}
+  尝试：{{{attempts.current}}} / {{{attempts.max}}}
+  详情：[{{{details.text}}}]({{{details.url}}})
+  {{#error}}
+  ```
+
+  {{{error}}}
+  ```
+  {{/error}}
+
+job.report.succeeded: |-
+  ✅ **成功**
+  尝试：{{{attempts.current}}} / {{{attempts.max}}}
+  详情：[{{{details.text}}}]({{{details.url}}})
+
+whatsapp.message.sending.error: 无法在 WhatsApp 中发送消息。
+whatsapp.message.receiving.error: 无法接收来自 WhatsApp 的消息
+whatsapp.message.removing.error: 无法从 WhatsApp 中删除消息
+job.scheduled.error.header: 计划任务执行失败
+
+message.from.whatsapp: |-
+  {{{text}}}
+
+  📱 *通过 WhatsApp 发送*
+
+message.from.api: |-
+  {{{text}}}
+
+  📱 *通过 API 发送*
+
+message.removed.in.whatsapp: |-
+  ❌ *此消息已在 WhatsApp 中被删除*
+
+message.edited.in.whatsapp: |-
+  {{{text}}}
+
+  ✏️ *已在 WhatsApp 中编辑*
+
+whatsapp.group.message: |-
+  👥 *{{{participant}}}*
+
+  {{{text}}}
+
+whatsapp.reaction.added: |-
+  *已反应* {{{emoji}}}
+
+whatsapp.reaction.removed: |-
+  *已移除反应*
+
+whatsapp.contact.group.suffix: '群组'
+whatsapp.contact.channel.suffix: '频道'
+whatsapp.contact.broadcast.suffix: '广播列表'
+# Aka Stories
+whatsapp.contact.status.name: '状态'
+
+app.connected.message: |-
+  🔗 **已连接：WhatsApp 会话到 ChatWoot 收件箱**
+
+  ✅ WhatsApp 会话 **{{{name}}}** 已成功连接到此 ChatWoot 收件箱。
+
+  此收件箱现已链接到你的**WhatsApp 账号**。你可以在这里直接收发消息——就像使用 WhatsApp 一样，但在 ChatWoot 内完成。
+
+  你也可以管理与此收件箱关联的 WhatsApp 会话。要查看可用操作，请向此对话发送 **help**。
+
+  📋 你可以执行的常见操作：
+  - 检查 WhatsApp 会话是否活动
+  - 重启或停止 WhatsApp 会话
+  - 登出并通过扫描新的二维码重新连接
+
+  如果一切正常，你就可以自由聊天。如果你看到警告，可能需要重新连接你的 WhatsApp 账号。
+
+  开始吧！🚀
+
+app.disconnected.message: |-
+  🔌 **已断开：从 ChatWoot 收件箱断开 WhatsApp 会话**
+
+  ❌ WhatsApp 会话 **{{{name}}}** 已与此 ChatWoot 收件箱断开。
+
+  你将无法再从 WhatsApp 发送或接收消息。
+
+  如需重新连接，请联系你的管理员。
+
+app.updated.message: |-
+  🔄 **已更新：WhatsApp 会话设置**
+
+  ✅ WhatsApp 会话 **{{{name}}}** 的设置已更新。
+
+app.commands.list: |-
+  你可以通过发送以下命令来管理**WhatsApp 集成**：
+
+  🖥️ **会话**：
+  1. **status** - 获取当前会话状态。
+  2. **restart** - 重启会话——将尝试重新连接你的 WhatsApp 账号。
+  3. **start** - 启动会话。
+  4. **stop** - 停止会话。
+  5. **logout** - 登出会话，以便你可以扫描二维码并修复会话。
+  6. **qr** - 获取该会话的二维码。
+  7. **screenshot** - 获取会话截图（仅在 **WEBJS** 引擎中可用）。
+  8. **help** - 查看可用命令。
+
+  {{#commands.server}}
+  {{#commands.server}}
+  ⚙️ 服务器：
+  - **server status** - 获取服务器版本和状态信息。
+  - **server reboot** - 优雅地重启服务器。
+  - **server reboot force** - 强制重启服务器。
+  {{/commands.server}}
+  {{/commands.server}}
+
+  向此对话发送**命令**（不区分大小写）或**命令编号**。
+
+app.commands.server.disabled: ⛔ **服务器命令已禁用**。
+
+  请联系你的管理员。
+
+  发送 **help** 获取可用命令列表。
+
+app.help.reminder: |-
+  发送 **help** 获取可用命令列表。
+
+app.session.status.change: |-
+  {{{emoji}}} "{{{session}}}" 会话已切换为 {{{status}}} 状态
+
+app.session.current.status: |-
+  {{{emoji}}} **{{{session}}}** 会话状态为 **{{{status}}}**
+  **WhatsApp 账号：**
+
+  📱 **{{{name}}} ({{{id}}})**
+
+app.session.status.working: |-
+  ✅ 此 ChatWoot 收件箱已链接到**WhatsApp 账号**，可以正常收发消息！
+
+  📱 **{{{name}}} ({{{id}}})**
+
+app.session.status.error: |-
+  ⚠️ **此 ChatWoot 收件箱已链接到 WhatsApp 账号，但尚未准备好收发消息！**
+
+  请检查会话状态，尝试重启，或登出后重新扫描二维码。
+
+app.session.scan.qr.code: |-
+  ⚠️ **请在手机上扫描二维码，将 WhatsApp 账号与此 ChatWoot 收件箱关联！**
+
+app.server.version.and.status: |-
+  **版本：**
+  ```
+  {{{version}}}
+  ```
+
+  **状态：**
+  ```
+  {{{status}}}
+  ```
+
+app.server.reboot: |-
+  服务器正在优雅重启...
+
+app.server.reboot.force: |-
+  服务器正在强制重启...
+
+app.logout.success: |-
+  ✅ 账号已成功取消授权！
+
+waha.new.version.available: |-
+  🔄 **有新版本可用！**
+
+  当前版本：**{{{currentVersion}}}**
+  新版本：**{{{newVersion}}}**
+
+  👉 查看[**🆕 更新日志**]({{{changelogUrl}}})
+
+waha.core.version.used: |-
+  ❤️ **支持 WAHA！**
+
+  你正在使用免费的 **WAHA Core** 版本。如果你觉得该项目有帮助，请考虑支持其开发。
+
+  你的支持是我们持续进行更新、修复和新增功能的唯一动力。
+
+  [**🎁 支持我们**]({{{supportUrl}}})
+
+chatwoot.to.whatsapp.message.text: |-
+  {{{ content }}}
+
+chatwoot.to.whatsapp.message.media.caption: |-
+  {{#singleAttachment}}
+  {{#content}}
+  {{{ content }}}
+  {{/content}}
+  {{/singleAttachment}}
+
+whatsapp.to.chatwoot.message: |-
+  {{{payload.body}}}
+
+whatsapp.to.chatwoot.message.contacts: |-
+  👤 **共享联系人**
+
+  {{#contacts}}
+  🪪 姓名: **{{fullName}}**
+  {{#phoneNumbers}}
+  - 📞 电话: **{{.}}**
+  {{/phoneNumbers}}
+
+  {{/contacts}}
+
+whatsapp.to.chatwoot.message.location: |-
+  {{#message}}
+  {{#locationMessage}}
+  📍 **共享位置**
+
+  {{#name}}
+  **{{name}}**
+  {{/name}}
+
+  {{#address}}
+  📍 **地址：** {{address}}
+  {{/address}}
+
+  {{#url}}
+  🌐 **网站：** {{url}}
+  {{/url}}
+
+  🔗 **在地图上查看：** https://www.google.com/maps?q={{degreesLatitude}},{{degreesLongitude}}
+  {{#caption}}{{caption}}{{/caption}}
+  {{/locationMessage}}
+
+  {{#liveLocationMessage}}
+  📍📡 **正在共享实时位置**
+  打开 **WhatsApp** 查看实时更新。
+
+  {{#name}}
+  **{{name}}**
+  {{/name}}
+
+  {{#address}}
+  📍 **地址：** {{address}}
+  {{/address}}
+
+  {{#url}}
+  🌐 **网站：** {{url}}
+  {{/url}}
+
+  🔗 **在地图上查看：** https://www.google.com/maps?q={{degreesLatitude}},{{degreesLongitude}}
+  {{#caption}}{{caption}}{{/caption}}
+  {{/liveLocationMessage}}
+  {{/message}}
+
+whatsapp.to.chatwoot.message.poll: |-
+  {{#poll}}
+  📊 **投票**
+
+  **{{name}}**
+  {{#options}}
+  - {{optionName}}
+  {{/options}}
+  {{/poll}}
+
+whatsapp.to.chatwoot.message.event: |-
+  {{#message}}
+  {{#eventMessage}}
+  📅 **活动**
+
+  **{{name}}**
+  {{#description}}
+  {{description}}
+  {{/description}}
+
+  {{#location.name}}
+  📍 **地点：** {{location.name}}
+  {{/location.name}}
+  {{#startTime}}
+  🕐 **开始时间：** {{startTime}}
+  {{/startTime}}
+  {{#endTime}}
+  🕐 **结束时间：** {{endTime}}
+  {{/endTime}}
+  {{#joinLink}}
+  🔗 **加入链接：** [{{joinLink}}]({{joinLink}})
+  {{/joinLink}}
+  {{/eventMessage}}
+  {{/message}}
+
+whatsapp.to.chatwoot.message.pix: |-
+  💳 **PIX - 复制粘贴**
+
+  {{#pixData}}
+  {{#merchantName}}
+  **{{merchantName}}**
+  {{/merchantName}}
+
+  {{#key}}
+  **PIX 密钥：** {{key}}
+  {{/key}}
+  {{#keyType}}
+  **类型：** {{keyType}}
+  {{/keyType}}
+  {{#totalAmount}}
+  **金额：** {{totalAmountFormatted}}
+  {{/totalAmount}}
+  {{#referenceId}}
+  **参考：** {{referenceId}}
+  {{/referenceId}}
+
+  💳 **PIX 复制粘贴已发送**
+  {{/pixData}}
+
+whatsapp.to.chatwoot.message.unsupported: |-
+  ⚠️ **ChatWoot 不支持此消息类型。**
+  📱 请打开 **WhatsApp** 查看。
+
+  详情: [{{{details.text}}}]({{{details.url}}})
+
+whatsapp.to.chatwoot.message.facebook.ad: |-
+  📢 **Facebook 广告**
+
+  **标题:** {{{adData.title}}}
+
+  **描述:**
+  {{{adData.body}}}
+
+  **广告链接:** [在 Facebook 查看]({{{adData.sourceUrl}}})
+  **广告 ID:** {{{adData.sourceId}}}
+
+  ---
+  💬 **客户消息:**
+  {{{payload.body}}}

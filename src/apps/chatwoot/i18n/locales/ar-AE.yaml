@@ -1,0 +1,354 @@
+# Arabic translations for ChatWoot integration
+locale.name: '🇦🇪 العربية (Arabic)'
+
+# رمز اللغة الأساسي - يجب أن يكون محليًا صالحًا وفق BCP 47
+# https://en.wikipedia.org/wiki/IETF_language_tag
+# تستخدمه WAHA لعرض الأرقام والعملات والتاريخ/الوقت
+locale.base: 'ar-AE'
+
+app.inbox.contact.name: 'تكامل واتساب (WAHA)'
+app.inbox.contact.avatar.url: 'https://raw.githubusercontent.com/devlikeapro/waha/core/logo.png'
+
+# "options" من date.toLocaleString
+# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#options
+datetime:
+  locales: ar-AE
+  day: 2-digit
+  month: 2-digit
+  year: numeric
+  hour: 2-digit
+  minute: 2-digit
+  # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#timezonename
+  timeZoneName: shortGeneric
+  # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  # timeZone: 'Asia/Dubai'
+
+job.report.error: |-
+  ⚠️ **{{{header}}}**
+  {{#attempts.nextDelay}}
+  🔄 إعادة المحاولة في {{attempts.nextDelay}} ثانية...
+  {{/attempts.nextDelay}}
+  {{^attempts.nextDelay}}
+  ❌ لم تبق محاولات أخرى. يرجى المحاولة لاحقًا.
+  {{/attempts.nextDelay}}
+  المحاولة: {{{attempts.current}}} / {{{attempts.max}}}
+  التفاصيل: [{{{details.text}}}]({{{details.url}}})
+  {{#error}}
+  ```
+
+  {{{error}}}
+  ```
+  {{/error}}
+
+job.report.succeeded: |-
+  ✅ **نجاح**
+  المحاولة: {{{attempts.current}}} / {{{attempts.max}}}
+  التفاصيل: [{{{details.text}}}]({{{details.url}}})
+
+whatsapp.message.sending.error: تعذر إرسال رسالة على واتساب.
+whatsapp.message.receiving.error: تعذر استلام رسالة من واتساب
+whatsapp.message.removing.error: تعذر إزالة رسالة من واتساب
+job.scheduled.error.header: فشل تنفيذ المهمة المجدولة
+
+message.from.whatsapp: |-
+  {{{text}}}
+
+  📱 *أرسلت من واتساب*
+
+message.from.api: |-
+  {{{text}}}
+
+  📱 *أرسلت عبر API*
+
+message.removed.in.whatsapp: |-
+  ❌ *تم حذف هذه الرسالة في واتساب*
+
+message.edited.in.whatsapp: |-
+  {{{text}}}
+
+  ✏️ *تم تعديلها في واتساب*
+
+whatsapp.group.message: |-
+  👥 *{{{participant}}}*
+
+  {{{text}}}
+
+whatsapp.reaction.added: |-
+  *تفاعل* {{{emoji}}}
+
+whatsapp.reaction.removed: |-
+  *تمت إزالة التفاعل*
+
+whatsapp.contact.group.suffix: 'مجموعة'
+whatsapp.contact.channel.suffix: 'قناة'
+whatsapp.contact.broadcast.suffix: 'قائمة البث'
+# Aka Stories
+whatsapp.contact.status.name: 'الحالة'
+
+app.connected.message: |-
+  🔗 **متصل: جلسة واتساب إلى صندوق وارد ChatWoot**
+
+  ✅ تم توصيل جلسة واتساب **{{{name}}}** بنجاح بصندوق وارد ChatWoot هذا.
+
+  صندوق الوارد هذا مرتبط الآن بـ **حساب واتساب** الخاص بك. يمكنك إرسال واستقبال الرسائل مباشرة من هنا — تمامًا مثل استخدام واتساب، ولكن داخل ChatWoot.
+
+  يمكنك أيضًا إدارة جلسة واتساب المرتبطة بصندوق الوارد هذا. لعرض الإجراءات المتاحة، أرسل **help** إلى هذه المحادثة.
+
+  📋 الإجراءات الشائعة التي يمكنك القيام بها:
+  - التحقق مما إذا كانت جلسة واتساب نشطة
+  - إعادة تشغيل أو إيقاف جلسة واتساب
+  - تسجيل الخروج وإعادة الاتصال عن طريق مسح رمز QR جديد
+
+  إذا كان كل شيء يعمل، ستتمكن من الدردشة بحرية. إذا رأيت تحذيرات، فقد تحتاج إلى إعادة توصيل حساب واتساب الخاص بك.
+
+  لنبدأ! 🚀
+
+app.disconnected.message: |-
+  🔌 **غير متصل: جلسة واتساب من صندوق وارد ChatWoot**
+
+  ❌ تم قطع اتصال جلسة واتساب **{{{name}}}** من صندوق وارد ChatWoot هذا.
+
+  لن تتمكن بعد الآن من إرسال أو استقبال رسائل من واتساب.
+
+  لإعادة الاتصال، يرجى الاتصال بالمسؤول الخاص بك.
+
+app.updated.message: |-
+  🔄 **تم التحديث: إعدادات جلسة واتساب**
+
+  ✅ تم تحديث إعدادات جلسة واتساب **{{{name}}}**.
+
+app.commands.list: |-
+  يمكنك إدارة **تكامل واتساب** عن طريق إرسال أحد الأوامر التالية:
+
+  🖥️ **الجلسة**:
+  1. **status** - الحصول على حالة الجلسة الحالية.
+  2. **restart** - إعادة تشغيل الجلسة - سيحاول هذا إعادة توصيل حساب واتساب الخاص بك.
+  3. **start** - بدء الجلسة.
+  4. **stop** - إيقاف الجلسة.
+  5. **logout** - تسجيل الخروج من الجلسة، حتى تتمكن من مسح رمز QR وإصلاح الجلسة.
+  6. **qr** - الحصول على رمز QR للجلسة.
+  7. **screenshot** - الحصول على لقطة شاشة للجلسة (متاح فقط في محرك **WEBJS**).
+  8. **help** - الأوامر المتاحة.
+
+  {{#commands.server}}
+  ⚙️ الخادم:
+  - **server status** - الحصول على معلومات إصدار الخادم وحالته.
+  - **server reboot** - إعادة تشغيل الخادم بسلاسة.
+  - **server reboot force** - إعادة تشغيل الخادم بالقوة.
+  {{/commands.server}}
+
+  أرسل **أمرًا** (غير حساس لحالة الأحرف) أو **رقم أمر** إلى هذه المحادثة.
+
+app.commands.server.disabled: ⛔ **تم تعطيل أوامر الخادم**.
+
+  يرجى التواصل مع مسؤول النظام لديك.
+
+  أرسل **help** للحصول على قائمة الأوامر المتاحة.
+
+app.help.reminder: |-
+  أرسل **help** للحصول على قائمة الأوامر المتاحة.
+
+app.session.status.change: |-
+  {{{emoji}}} تم تغيير حالة جلسة "{{{session}}}" إلى {{{status}}}
+
+app.session.current.status: |-
+  {{{emoji}}} حالة جلسة **{{{session}}}** هي **{{{status}}}**
+  **حساب واتساب:**
+
+  📱 **{{{name}}} ({{{id}}})**
+
+app.session.status.working: |-
+  ✅ صندوق وارد ChatWoot هذا مرتبط بـ **حساب واتساب** وجاهز لإرسال واستقبال الرسائل!
+
+  📱 **{{{name}}} ({{{id}}})**
+
+app.session.status.error: |-
+  ⚠️ **صندوق وارد ChatWoot هذا مرتبط بحساب واتساب ولكنه غير جاهز لإرسال واستقبال الرسائل!**
+
+  يرجى التحقق من حالة الجلسة ومحاولة إعادة تشغيلها أو تسجيل الخروج ومسح رمز QR مرة أخرى.
+
+app.session.scan.qr.code: |-
+  ⚠️ **امسح رمز QR على هاتفك لربط حساب واتساب بصندوق وارد ChatWoot هذا!**
+
+app.server.version.and.status: |-
+  **الإصدار:**
+  ```
+  {{{version}}}
+  ```
+
+  **الحالة:**
+  ```
+  {{{status}}}
+  ```
+
+app.server.reboot: |-
+  يتم إعادة تشغيل الخادم بسلاسة...
+
+app.server.reboot.force: |-
+  يتم إعادة تشغيل الخادم بالقوة...
+
+app.logout.success: |-
+  ✅ تم إلغاء تفويض الحساب بنجاح!
+
+waha.new.version.available: |-
+  🔄 **إصدار جديد متاح!**
+
+  الإصدار الحالي: **{{{currentVersion}}}**
+  الإصدار الجديد: **{{{newVersion}}}**
+
+  👉 تحقق مما هو جديد في [**🆕 سجل التغييرات**]({{{changelogUrl}}})
+
+waha.core.version.used: |-
+  ❤️ **ادعم WAHA!**
+
+  أنت تستخدم إصدار **WAHA Core** المجاني. إذا وجدت هذا المشروع مفيدًا، فيرجى التفكير في دعم تطويره.
+
+  دعمك هو الطريقة الوحيدة التي يمكننا من خلالها الاستمرار في العمل على التحديثات والإصلاحات والميزات الجديدة.
+
+  [**🎁 ادعمنا**]({{{supportUrl}}})
+
+chatwoot.to.whatsapp.message.text: |-
+  {{{ content }}}
+
+chatwoot.to.whatsapp.message.media.caption: |-
+  {{#singleAttachment}}
+  {{#content}}
+  {{{ content }}}
+  {{/content}}
+  {{/singleAttachment}}
+
+whatsapp.to.chatwoot.message: |-
+  {{{payload.body}}}
+
+whatsapp.to.chatwoot.message.contacts: |-
+  👤 **جهات الاتصال المشتركة**
+
+  {{#contacts}}
+  🪪 الاسم: **{{fullName}}**
+  {{#phoneNumbers}}
+  - 📞 الهاتف: **{{.}}**
+  {{/phoneNumbers}}
+
+  {{/contacts}}
+
+whatsapp.to.chatwoot.message.location: |-
+  {{#message}}
+  {{#locationMessage}}
+  📍 **الموقع المشترك**
+
+  {{#name}}
+  **{{name}}**
+  {{/name}}
+
+  {{#address}}
+  📍 **العنوان:** {{address}}
+  {{/address}}
+
+  {{#url}}
+  🌐 **الموقع الإلكتروني:** {{url}}
+  {{/url}}
+
+  🔗 **عرض على الخريطة:** https://www.google.com/maps?q={{degreesLatitude}},{{degreesLongitude}}
+  {{#caption}}{{caption}}{{/caption}}
+  {{/locationMessage}}
+
+  {{#liveLocationMessage}}
+  📍📡 **مشاركة الموقع المباشر**
+  افتح **WhatsApp** لعرض التحديثات اللحظية.
+
+  {{#name}}
+  **{{name}}**
+  {{/name}}
+
+  {{#address}}
+  📍 **العنوان:** {{address}}
+  {{/address}}
+
+  {{#url}}
+  🌐 **الموقع الإلكتروني:** {{url}}
+  {{/url}}
+
+  🔗 **عرض على الخريطة:** https://www.google.com/maps?q={{degreesLatitude}},{{degreesLongitude}}
+  {{#caption}}{{caption}}{{/caption}}
+  {{/liveLocationMessage}}
+  {{/message}}
+
+whatsapp.to.chatwoot.message.poll: |-
+  {{#poll}}
+  📊 **استطلاع**
+
+  **{{name}}**
+  {{#options}}
+  - {{optionName}}
+  {{/options}}
+  {{/poll}}
+
+whatsapp.to.chatwoot.message.event: |-
+  {{#message}}
+  {{#eventMessage}}
+  📅 **حدث**
+
+  **{{name}}**
+  {{#description}}
+  {{description}}
+  {{/description}}
+
+  {{#location.name}}
+  📍 **الموقع:** {{location.name}}
+  {{/location.name}}
+  {{#startTime}}
+  🕐 **البدء:** {{startTime}}
+  {{/startTime}}
+  {{#endTime}}
+  🕐 **الانتهاء:** {{endTime}}
+  {{/endTime}}
+  {{#joinLink}}
+  🔗 **رابط الانضمام:** [{{joinLink}}]({{joinLink}})
+  {{/joinLink}}
+  {{/eventMessage}}
+  {{/message}}
+
+whatsapp.to.chatwoot.message.pix: |-
+  💳 **PIX - نسخ ولصق**
+
+  {{#pixData}}
+  {{#merchantName}}
+  **{{merchantName}}**
+  {{/merchantName}}
+
+  {{#key}}
+  **مفتاح PIX:** {{key}}
+  {{/key}}
+  {{#keyType}}
+  **النوع:** {{keyType}}
+  {{/keyType}}
+  {{#totalAmount}}
+  **المبلغ:** {{totalAmountFormatted}}
+  {{/totalAmount}}
+  {{#referenceId}}
+  **المرجع:** {{referenceId}}
+  {{/referenceId}}
+
+  💳 **تم إرسال PIX نسخ ولصق**
+  {{/pixData}}
+
+whatsapp.to.chatwoot.message.unsupported: |-
+  ⚠️ **هذا النوع من الرسائل غير مدعوم في ChatWoot.**
+  📱 يرجى فتح **WhatsApp** لعرضه.
+
+  التفاصيل: [{{{details.text}}}]({{{details.url}}})
+
+whatsapp.to.chatwoot.message.facebook.ad: |-
+  📢 **إعلان فيسبوك**
+
+  **العنوان:** {{{adData.title}}}
+
+  **الوصف:**
+  {{{adData.body}}}
+
+  **رابط الإعلان:** [عرض على فيسبوك]({{{adData.sourceUrl}}})
+  **معرّف الإعلان:** {{{adData.sourceId}}}
+
+  ---
+  💬 **رسالة العميل:**
+  {{{payload.body}}}

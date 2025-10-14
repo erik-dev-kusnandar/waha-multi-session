@@ -1,0 +1,357 @@
+# Spanish translations for ChatWoot integration
+locale.name: '🇪🇸 Español (Spanish)'
+
+# Código de locale base - debe ser un locale BCP 47 válido
+# https://en.wikipedia.org/wiki/IETF_language_tag
+# WAHA lo utiliza para formatear números, moneda y fecha/hora
+locale.base: 'es-ES'
+
+app.inbox.contact.name: 'Integración de WhatsApp (WAHA)'
+app.inbox.contact.avatar.url: 'https://raw.githubusercontent.com/devlikeapro/waha/core/logo.png'
+
+# "opciones" de date.toLocaleString
+# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#options
+datetime:
+  locales: es-ES
+  day: 2-digit
+  month: 2-digit
+  year: numeric
+  hour: 2-digit
+  minute: 2-digit
+  # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#timezonename
+  timeZoneName: shortGeneric
+  # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  # timeZone: 'Europe/Madrid'
+
+job.report.error: |-
+  ⚠️ **{{{header}}}**
+  {{#attempts.nextDelay}}
+  🔄 Reintentando en {{attempts.nextDelay}} segundos...
+  {{/attempts.nextDelay}}
+  {{^attempts.nextDelay}}
+  ❌ No quedan más intentos. Por favor, inténtelo de nuevo más tarde.
+  {{/attempts.nextDelay}}
+  Intento: {{{attempts.current}}} / {{{attempts.max}}}
+  Detalles: [{{{details.text}}}]({{{details.url}}})
+  {{#error}}
+  ```
+
+  {{{error}}}
+  ```
+  {{/error}}
+
+job.report.succeeded: |-
+  ✅ **Éxito**
+  Intento: {{{attempts.current}}} / {{{attempts.max}}}
+  Detalles: [{{{details.text}}}]({{{details.url}}})
+
+whatsapp.message.sending.error: No se pudo enviar un mensaje en WhatsApp.
+whatsapp.message.receiving.error: No se pudo recibir un mensaje de WhatsApp
+whatsapp.message.removing.error: No se pudo eliminar un mensaje de WhatsApp
+job.scheduled.error.header: La tarea programada no se pudo ejecutar
+
+message.from.whatsapp: |-
+  {{{text}}}
+
+  📱 *Enviado desde WhatsApp*
+
+message.from.api: |-
+  {{{text}}}
+
+  📱 *Enviado a través de API*
+
+message.removed.in.whatsapp: |-
+  ❌ *Este mensaje fue eliminado en WhatsApp*
+
+message.edited.in.whatsapp: |-
+  {{{text}}}
+
+  ✏️ *Editado en WhatsApp*
+
+whatsapp.group.message: |-
+  👥 *{{{participant}}}*
+
+  {{{text}}}
+
+whatsapp.reaction.added: |-
+  *Reaccionó con* {{{emoji}}}
+
+whatsapp.reaction.removed: |-
+  *Reacción eliminada*
+
+whatsapp.contact.group.suffix: 'Grupo'
+whatsapp.contact.channel.suffix: 'Canal'
+whatsapp.contact.broadcast.suffix: 'Lista de difusión'
+# Aka Stories
+whatsapp.contact.status.name: 'Estado'
+
+app.connected.message: |-
+  🔗 **CONECTADO: Sesión de WhatsApp a Bandeja de Entrada de ChatWoot**
+
+  ✅ La sesión de WhatsApp **{{{name}}}** ha sido conectada exitosamente a esta Bandeja de Entrada de ChatWoot.
+
+  Esta bandeja de entrada ahora está vinculada a tu **Cuenta de WhatsApp**. Puedes enviar y recibir mensajes directamente desde aquí — justo como usar WhatsApp, pero dentro de ChatWoot.
+
+  También puedes gestionar la sesión de WhatsApp vinculada a esta bandeja de entrada. Para ver las acciones disponibles, envía **help** a este chat.
+
+  📋 Acciones comunes que puedes realizar:
+  - Comprobar si la sesión de WhatsApp está activa
+  - Reiniciar o Detener la sesión de WhatsApp
+  - Cerrar sesión y reconectar escaneando un nuevo código QR
+
+  Si todo funciona, podrás chatear libremente. Si ves advertencias, es posible que necesites reconectar tu cuenta de WhatsApp.
+
+  ¡Comencemos! 🚀
+
+app.disconnected.message: |-
+  🔌 **DESCONECTADO: Sesión de WhatsApp de Bandeja de Entrada de ChatWoot**
+
+  ❌ La sesión de WhatsApp **{{{name}}}** ha sido desconectada de esta Bandeja de Entrada de ChatWoot.
+
+  Ya no podrás enviar o recibir mensajes desde WhatsApp.
+
+  Para reconectar, por favor contacta a tu administrador.
+
+app.updated.message: |-
+  🔄 **ACTUALIZADO: Configuración de Sesión de WhatsApp**
+
+  ✅ La configuración para la sesión de WhatsApp **{{{name}}}** ha sido actualizada.
+
+app.commands.list: |-
+  Puedes gestionar la **Integración de WhatsApp** enviando uno de los siguientes comandos:
+
+  🖥️ **Sesión**:
+  1. **status** - obtener el estado actual de la sesión.
+  2. **restart** - reiniciar la sesión - esto intentará reconectar tu cuenta de WhatsApp.
+  3. **start** - iniciar la sesión.
+  4. **stop** - detener la sesión.
+  5. **logout** - cerrar sesión, para que puedas escanear el código QR y reparar la sesión.
+  6. **qr** - obtener el código QR para la sesión.
+  7. **screenshot** - obtener una captura de pantalla de la sesión (solo disponible en el motor **WEBJS**).
+  8. **help** - comandos disponibles.
+
+  {{#commands.server}}
+  {{#commands.server}}
+  ⚙️ Servidor:
+  - **server status** - obtener información de versión y estado del servidor.
+  - **server reboot** - reiniciar el servidor de forma segura.
+  - **server reboot force** - forzar el reinicio del servidor.
+  {{/commands.server}}
+  {{/commands.server}}
+
+  Envía un **comando** (no sensible a mayúsculas/minúsculas) o un **número de comando** a esta conversación.
+
+app.commands.server.disabled: ⛔ **Los comandos del servidor están
+  deshabilitados**.
+
+  Por favor, contacta a tu administrador.
+
+  Envía **help** para obtener la lista de comandos disponibles.
+
+app.help.reminder: |-
+  Envía **help** para obtener la lista de comandos disponibles.
+
+app.session.status.change: |-
+  {{{emoji}}} La sesión "{{{session}}}" cambió al estado {{{status}}}
+
+app.session.current.status: |-
+  {{{emoji}}} El estado de la sesión **{{{session}}}** es **{{{status}}}**
+  **Cuenta de WhatsApp:**
+
+  📱 **{{{name}}} ({{{id}}})**
+
+app.session.status.working: |-
+  ✅ ¡Esta Bandeja de Entrada de ChatWoot está vinculada a la **Cuenta de WhatsApp** y lista para enviar y recibir mensajes!
+
+  📱 **{{{name}}} ({{{id}}})**
+
+app.session.status.error: |-
+  ⚠️ **¡Esta Bandeja de Entrada de ChatWoot está vinculada a la Cuenta de WhatsApp pero NO está lista para enviar y recibir mensajes!**
+
+  Por favor, comprueba el estado de la sesión e intenta reiniciarla o cierra sesión y escanea el código QR de nuevo.
+
+app.session.scan.qr.code: |-
+  ⚠️ **¡Escanea el código QR en tu teléfono para vincular la Cuenta de WhatsApp con esta Bandeja de Entrada de ChatWoot!**
+
+app.server.version.and.status: |-
+  **Versión:**
+  ```
+  {{{version}}}
+  ```
+
+  **Estado:**
+  ```
+  {{{status}}}
+  ```
+
+app.server.reboot: |-
+  El servidor se está reiniciando de forma segura...
+
+app.server.reboot.force: |-
+  El servidor se está reiniciando forzadamente...
+
+app.logout.success: |-
+  ✅ ¡Cuenta desautorizada con éxito!
+
+waha.new.version.available: |-
+  🔄 **¡Nueva Versión Disponible!**
+
+  Versión actual: **{{{currentVersion}}}**
+  Nueva versión: **{{{newVersion}}}**
+
+  👉 Mira qué hay de nuevo en el [**🆕 Registro de Cambios**]({{{changelogUrl}}})
+
+waha.core.version.used: |-
+  ❤️ **¡Apoya a WAHA!**
+
+  Estás usando la versión gratuita **WAHA Core**. Si encuentras útil este proyecto, por favor considera apoyar su desarrollo.
+
+  Tu apoyo es la única forma en que podemos seguir trabajando en actualizaciones, correcciones y nuevas funciones.
+
+  [**🎁 Apóyanos**]({{{supportUrl}}})
+
+chatwoot.to.whatsapp.message.text: |-
+  {{{ content }}}
+
+chatwoot.to.whatsapp.message.media.caption: |-
+  {{#singleAttachment}}
+  {{#content}}
+  {{{ content }}}
+  {{/content}}
+  {{/singleAttachment}}
+
+whatsapp.to.chatwoot.message: |-
+  {{{payload.body}}}
+
+whatsapp.to.chatwoot.message.contacts: |-
+  👤 **Contacto(s) compartido(s)**
+
+  {{#contacts}}
+  🪪 Nombre: **{{fullName}}**
+  {{#phoneNumbers}}
+  - 📞 Teléfono: **{{.}}**
+  {{/phoneNumbers}}
+
+  {{/contacts}}
+
+whatsapp.to.chatwoot.message.location: |-
+  {{#message}}
+  {{#locationMessage}}
+  📍 **Ubicación compartida**
+
+  {{#name}}
+  **{{name}}**
+  {{/name}}
+
+  {{#address}}
+  📍 **Dirección:** {{address}}
+  {{/address}}
+
+  {{#url}}
+  🌐 **Sitio web:** {{url}}
+  {{/url}}
+
+  🔗 **Ver en el mapa:** https://www.google.com/maps?q={{degreesLatitude}},{{degreesLongitude}}
+  {{#caption}}{{caption}}{{/caption}}
+  {{/locationMessage}}
+
+  {{#liveLocationMessage}}
+  📍📡 **Compartiendo ubicación en tiempo real**
+  Abre **WhatsApp** para ver las actualizaciones en tiempo real.
+
+  {{#name}}
+  **{{name}}**
+  {{/name}}
+
+  {{#address}}
+  📍 **Dirección:** {{address}}
+  {{/address}}
+
+  {{#url}}
+  🌐 **Sitio web:** {{url}}
+  {{/url}}
+
+  🔗 **Ver en el mapa:** https://www.google.com/maps?q={{degreesLatitude}},{{degreesLongitude}}
+  {{#caption}}{{caption}}{{/caption}}
+  {{/liveLocationMessage}}
+  {{/message}}
+
+whatsapp.to.chatwoot.message.poll: |-
+  {{#poll}}
+  📊 **Encuesta**
+
+  **{{name}}**
+  {{#options}}
+  - {{optionName}}
+  {{/options}}
+  {{/poll}}
+
+whatsapp.to.chatwoot.message.event: |-
+  {{#message}}
+  {{#eventMessage}}
+  📅 **Evento**
+
+  **{{name}}**
+  {{#description}}
+  {{description}}
+  {{/description}}
+
+  {{#location.name}}
+  📍 **Ubicación:** {{location.name}}
+  {{/location.name}}
+  {{#startTime}}
+  🕐 **Inicio:** {{startTime}}
+  {{/startTime}}
+  {{#endTime}}
+  🕐 **Fin:** {{endTime}}
+  {{/endTime}}
+  {{#joinLink}}
+  🔗 **Enlace para unirse:** [{{joinLink}}]({{joinLink}})
+  {{/joinLink}}
+  {{/eventMessage}}
+  {{/message}}
+
+whatsapp.to.chatwoot.message.pix: |-
+  💳 **PIX - Copiar y Pegar**
+
+  {{#pixData}}
+  {{#merchantName}}
+  **{{merchantName}}**
+  {{/merchantName}}
+
+  {{#key}}
+  **Clave PIX:** {{key}}
+  {{/key}}
+  {{#keyType}}
+  **Tipo:** {{keyType}}
+  {{/keyType}}
+  {{#totalAmount}}
+  **Importe:** {{totalAmountFormatted}}
+  {{/totalAmount}}
+  {{#referenceId}}
+  **Referencia:** {{referenceId}}
+  {{/referenceId}}
+
+  💳 **PIX Copiar y Pegar enviado**
+  {{/pixData}}
+
+whatsapp.to.chatwoot.message.unsupported: |-
+  ⚠️ **Este tipo de mensaje no es compatible con ChatWoot.**
+  📱 Por favor, abre **WhatsApp** para verlo.
+
+  Detalles: [{{{details.text}}}]({{{details.url}}})
+
+whatsapp.to.chatwoot.message.facebook.ad: |-
+  📢 **ANUNCIO DE FACEBOOK**
+
+  **Título:** {{{adData.title}}}
+
+  **Descripción:**
+  {{{adData.body}}}
+
+  **Enlace del anuncio:** [Ver en Facebook]({{{adData.sourceUrl}}})
+  **ID del anuncio:** {{{adData.sourceId}}}
+
+  ---
+  💬 **Mensaje del cliente:**
+  {{{payload.body}}}
