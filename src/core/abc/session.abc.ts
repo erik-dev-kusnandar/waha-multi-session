@@ -139,10 +139,36 @@ const CHROME_PATH = '/usr/bin/google-chrome-stable';
 const CHROMIUM_PATH = '/usr/bin/chromium';
 
 export function getBrowserExecutablePath() {
+  // 1. Try environment variable
+  const envPath = process.env.WAHA_BROWSER_EXECUTABLE_PATH;
+  if (envPath && fs.existsSync(envPath)) {
+    return envPath;
+  }
+
+  // 2. Try default Linux paths
   if (fs.existsSync(CHROME_PATH)) {
     return CHROME_PATH;
   }
-  return CHROMIUM_PATH;
+  if (fs.existsSync(CHROMIUM_PATH)) {
+    return CHROMIUM_PATH;
+  }
+
+  // 3. Try Windows paths
+  if (process.platform === 'win32') {
+    const windowsPaths = [
+      'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+      'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+      'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+    ];
+    for (const winPath of windowsPaths) {
+      if (fs.existsSync(winPath)) {
+        return winPath;
+      }
+    }
+  }
+
+  // 4. No browser found - return undefined for puppeteer to use its own
+  return undefined;
 }
 
 export function ensureSuffix(phone) {

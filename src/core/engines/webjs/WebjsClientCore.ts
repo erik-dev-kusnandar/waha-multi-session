@@ -120,6 +120,12 @@ export class WebjsClientCore extends Client {
   async destroy() {
     this.events.removeAllListeners();
     this.wpage?.removeAllListeners();
+    // Safety check: if browser wasn't initialized, we don't need to call super.destroy()
+    // which might try to close a null browser
+    // @ts-ignore
+    if (!this.pupBrowser) {
+      return;
+    }
     await super.destroy();
   }
 
