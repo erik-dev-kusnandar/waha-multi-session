@@ -47,6 +47,7 @@ import { DOCS_URL } from './exceptions';
 import { getProxyConfig } from './helpers.proxy';
 import { MediaManager } from './media/MediaManager';
 import { LocalSessionAuthRepository } from './storage/LocalSessionAuthRepository';
+import { LocalSessionConfigRepository } from './storage/LocalSessionConfigRepository';
 import { LocalStoreCore } from './storage/LocalStoreCore';
 
 export class OnlyDefaultSessionIsAllowed extends UnprocessableEntityException {
@@ -54,7 +55,7 @@ export class OnlyDefaultSessionIsAllowed extends UnprocessableEntityException {
     const encoded = Buffer.from(name, 'utf-8').toString('base64');
     super(
       `WAHA Core support only 'default' session. You tried to access '${name}' session (base64: ${encoded}). ` +
-        `If you want to run more then one WhatsApp account - please get WAHA PLUS version. Check this out: ${DOCS_URL}`,
+      `If you want to run more then one WhatsApp account - please get WAHA PLUS version. Check this out: ${DOCS_URL}`,
     );
   }
 }
@@ -105,6 +106,7 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
 
     this.store = new LocalStoreCore(engineName.toLowerCase());
     this.sessionAuthRepository = new LocalSessionAuthRepository(this.store);
+    this.sessionConfigRepository = new LocalSessionConfigRepository(this.store);
     this.clearStorage().catch((error) => {
       this.log.error({ error }, 'Error while clearing storage');
     });
@@ -168,6 +170,7 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
 
   async upsert(name: string, config?: SessionConfig): Promise<void> {
     this.sessionConfigs.set(name, config);
+    await this.sessionConfigRepository.saveConfig(name, config);
   }
 
   async start(name: string): Promise<SessionDTO> {
@@ -302,6 +305,7 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
     this.sessions.set(name, DefaultSessionStatus.REMOVED);
     this.updateSession(name);
     this.sessionConfigs.delete(name);
+    await this.sessionConfigRepository.deleteConfig(name);
   }
 
   /**
@@ -310,7 +314,7 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
   private getWebhooks(sessionName?: string) {
     // Webhooks desabilitados para evitar erros 429
     return [];
-    
+
     // Código original comentado:
     // let webhooks: WebhookConfig[] = [];
     // const sessionConfig = sessionName ? this.sessionConfigs.get(sessionName) : this.sessionConfigs.get(this.DEFAULT);
@@ -346,7 +350,7 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
     if (!session || session === DefaultSessionStatus.REMOVED) {
       throw new NotFoundException(
         `We didn't find a session with name '${name}'.\n` +
-          `Please start it first by using POST /api/sessions/${name}/start request`,
+        `Please start it first by using POST /api/sessions/${name}/start request`,
       );
     }
     return session as WhatsappSession;
@@ -354,12 +358,12 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
 
   async getSessions(all: boolean): Promise<SessionInfo[]> {
     const sessions: SessionInfo[] = [];
-    
+
     for (const [sessionName, session] of this.sessions.entries()) {
       if (session === DefaultSessionStatus.REMOVED) {
         continue; // Skip removed sessions
       }
-      
+
       if (session === DefaultSessionStatus.STOPPED) {
         if (all) {
           sessions.push({
@@ -371,11 +375,11 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
         }
         continue;
       }
-      
+
       if (!session && !all) {
         continue;
       }
-      
+
       const whatsappSession = session as WhatsappSession;
       const me = whatsappSession?.getSessionMeInfo();
       sessions.push({
@@ -385,7 +389,7 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
         me: me,
       });
     }
-    
+
     return sessions;
   }
 
@@ -435,6 +439,19 @@ export class SessionManagerCore extends SessionManager implements OnModuleInit {
 
   async init() {
     await this.store.init();
+
+    // Load existing sessions from storage
+    const sessionNames = await this.sessionConfigRepository.getAllConfigs();
+    for (const name of sessionNames) {
+      if (!this.sessions.has(name)) {
+        this.sessions.set(name, DefaultSessionStatus.STOPPED);
+        const config = await this.sessionConfigRepository.getConfig(name);
+        if (config) {
+          this.sessionConfigs.set(name, config);
+        }
+      }
+    }
+
     const knex = this.store.getWAHADatabase();
     await this.appsService.migrate(knex);
   }
